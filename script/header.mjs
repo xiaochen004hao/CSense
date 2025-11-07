@@ -11,4 +11,5 @@ export default `// ==UserScript==
 // @icon         https://m.ccw.site/community/images/logo-ccw.png
 // @grant        none
 // @run-at       document-start
+// @require      https://code.jquery.com/jquery-3.6.0.min.js
 // ==/UserScript==`
