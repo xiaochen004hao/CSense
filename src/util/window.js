@@ -11,8 +11,8 @@ import { CSENSE_WINDOW_BASE_ZINDEX } from './constant'
 export function createWindow(element, onClose) {
   const reopenButton = document.createElement('button')
   reopenButton.style.position = 'fixed'
-  reopenButton.style.bottom = '20px'
-  reopenButton.style.right = '20px'
+  reopenButton.style.left = '40px'
+  reopenButton.style.top = '100px'
   reopenButton.style.zIndex = String(CSENSE_WINDOW_BASE_ZINDEX)
   reopenButton.style.padding = '10px'
   reopenButton.style.color = 'white'
@@ -23,11 +23,11 @@ export function createWindow(element, onClose) {
   reopenButton.style.height = '50px'
   reopenButton.style.borderRadius = '50%'
   reopenButton.style.background = 'linear-gradient(45deg, #005EAC, #404040)'
-  reopenButton.title = 'CCW 脆弱性的根本证明。'
+  reopenButton.title = '川菜王？脆弱性？的根本证明？'
 
   const image = document.createElement('img')
   image.src = LOGO_IMG
-  image.alt = 'CSense'
+  image.alt = 'C-S-ense'
   reopenButton.appendChild(image)
 
   let isDraggingButton = false
@@ -81,7 +81,7 @@ export function createWindow(element, onClose) {
   }
 
   const floatingDiv = document.createElement('div')
-  floatingDiv.className = 'csense-window'
+  floatingDiv.className = 'c-s-ense_window'
   floatingDiv.style.position = 'fixed'
   floatingDiv.style.minWidth = '240px'
   floatingDiv.style.minHeight = '120px'
@@ -136,7 +136,7 @@ export function createWindow(element, onClose) {
 
   const logo = document.createElement('img')
   logo.src = LOGO_IMG
-  logo.alt = 'CSense'
+  logo.alt = 'C-S-ense'
   logo.style.cursor = 'pointer'
   logo.style.height = '24px'
   logo.style.marginRight = '10px' // Add margin to the right of the logo
@@ -167,7 +167,7 @@ export function createWindow(element, onClose) {
   header.appendChild(logo)
 
   const title = document.createElement('strong')
-  title.textContent = 'CSense'
+  title.textContent = 'C-S-ense'
   title.style.flexGrow = '1' // Ensure the title takes up available space
   title.style.textAlign = 'left'
   title.style.fontFamily = 'monospace' // Geeky font style

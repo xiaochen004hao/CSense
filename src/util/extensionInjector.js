@@ -15,7 +15,7 @@ export class ExtensionInjector {
       try {
         callback(extensionObject)
       } catch (e) {
-        console.error(`[CSense] 扩展事件 ${name} 回调失败`, e)
+        console.error(`[C-S-ense] 扩展 事件 ${name} 回调 失败`, e)
       }
     }
   }

@@ -18,7 +18,7 @@ export class AboutScene {
     const container = document.createElement('div')
     const logo = document.createElement('img')
     logo.src = LOGO_IMG
-    logo.alt = 'CSense'
+    logo.alt = 'C-S-ense'
     logo.style.display = 'block'
     logo.style.margin = '0 auto'
     logo.style.width = '120px'
@@ -28,7 +28,7 @@ export class AboutScene {
     container.appendChild(logo)
 
     const description = document.createElement('p')
-    description.textContent = '一个 CCW 安全审计工具。'
+    description.textContent = '一个川菜王 - 安全审计 - 工具。'
     description.style.textAlign = 'center'
     description.style.fontWeight = 'bold'
     description.style.fontSize = 'small'
@@ -48,7 +48,7 @@ export class AboutScene {
     container.appendChild(this.pSmall('请勿将此工具用于非法用途。'))
     container.appendChild(
       this.pSmall(
-        '此工具的源代码位于 https://github.com/csense-rev/csense-rev。'
+        '此工具的源代码位于 https://github.com/xiaochen004hao/CSense。'
       )
     )
 

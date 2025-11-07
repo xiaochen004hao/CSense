@@ -18,7 +18,8 @@ export class ExtensionOverlay {
       manager.removeOverlay(this)
     })
     globalState.button.style.filter = 'invert(1) hue-rotate(180deg)'
-    globalState.button.title = 'CSense 拦截了扩展的加载，请点击进行处理。'
+    globalState.button.title = 'C-S-ense 拦截了扩展的加载，请点击进行处理。'
+
     this.scene = new ExtensionScene(this.manager, this)
   }
   render() {
@@ -48,6 +49,6 @@ export class ExtensionOverlay {
   }
   dispose() {
     globalState.button.style.filter = 'none'
-    globalState.button.title = 'CCW 脆弱性的根本证明。'
+    globalState.button.title = '川菜王？脆弱性？的根本证明？'
   }
 }
