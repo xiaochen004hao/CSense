@@ -46,9 +46,9 @@ export class CCWDataScene {
     listItem.style.alignItems = 'center'
     listItem.style.marginBottom = '5px'
     listItem.style.padding = '5px'
-    listItem.style.border = '1px solid #ddd'
+    listItem.style.border = '1px solid #0e0e0e'
     listItem.style.borderRadius = '4px'
-    listItem.style.backgroundColor = '#f9f9f9'
+    listItem.style.backgroundColor = '#1e1e1e'
 
     const nameSpan = document.createElement('span')
     nameSpan.textContent = name
@@ -59,6 +59,8 @@ export class CCWDataScene {
     const valueInput = document.createElement('input')
     valueInput.type = 'text'
     valueInput.style.fontFamily = 'monospace'
+    valueInput.style.backgroundColor = '#333333'
+    valueInput.style.color = '#ffffff'
     valueInput.value = Array.isArray(value) ? JSON.stringify(value) : value
     valueInput.style.flexGrow = '2'
     valueInput.style.marginRight = '10px'
@@ -90,11 +92,11 @@ export class CCWDataScene {
     projectTab.textContent = '作品'
     projectTab.style.flexGrow = '1'
     projectTab.style.padding = '10px'
-    projectTab.style.border = '1px solid #ddd'
+    projectTab.style.border = '1px solid #0e0e0e'
     projectTab.style.borderBottom =
-      this.selected === 'project' ? 'none' : '1px solid #ddd'
+      this.selected === 'project' ? 'none' : '1px solid #0e0e0e'
     projectTab.style.backgroundColor =
-      this.selected === 'project' ? '#f9f9f9' : '#fff'
+      this.selected === 'project' ? '#333333' : '#1e1e1e'
     projectTab.style.cursor = 'pointer'
     projectTab.addEventListener('click', () => {
       this.selected = 'project'
@@ -105,11 +107,11 @@ export class CCWDataScene {
     userTab.textContent = '用户'
     userTab.style.flexGrow = '1'
     userTab.style.padding = '10px'
-    userTab.style.border = '1px solid #ddd'
+    userTab.style.border = '1px solid #0e0e0e'
     userTab.style.borderBottom =
-      this.selected === 'user' ? 'none' : '1px solid #ddd'
+      this.selected === 'user' ? 'none' : '1px solid #0e0e0e'
     userTab.style.backgroundColor =
-      this.selected === 'user' ? '#f9f9f9' : '#fff'
+      this.selected === 'user' ? '#333333' : '#1e1e1e'
     userTab.style.cursor = 'pointer'
     userTab.addEventListener('click', () => {
       this.selected = 'user'
@@ -124,9 +126,11 @@ export class CCWDataScene {
     searchInput.type = 'text'
     searchInput.placeholder = '搜索变量...'
     searchInput.style.padding = '5px'
-    searchInput.style.border = '1px solid #ddd'
+    searchInput.style.border = '1px solid #0e0e0e'
     searchInput.style.width = '100%'
     searchInput.style.boxSizing = 'border-box'
+    searchInput.style.backgroundColor = '#333333'
+    searchInput.style.color = '#ffffff'
     searchInput.addEventListener('input', () => {
       const filter = searchInput.value.toLowerCase()
       const items = variableList.children

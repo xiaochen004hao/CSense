@@ -103,8 +103,11 @@ export class SpriteScene {
     cloneIndex.placeholder = '克隆体编号'
     cloneIndex.style.flexGrow = '1'
     cloneIndex.style.padding = '5px'
-    cloneIndex.style.border = '1px solid #ddd'
+    cloneIndex.style.border = '1px solid #0e0e0e'
     cloneIndex.style.borderRadius = '4px'
+    cloneIndex.style.backgroundColor = '#333333'
+    cloneIndex.style.color = 'white'
+
     cloneIndex.addEventListener('change', () => {
       const index = parseInt(cloneIndex.value)
       if (index >= 1 && index <= this.sprite.clones.length) {
@@ -127,9 +130,11 @@ export class SpriteScene {
     searchInput.type = 'text'
     searchInput.placeholder = '搜索变量...'
     searchInput.style.padding = '5px'
-    searchInput.style.border = '1px solid #ddd'
+    searchInput.style.border = '1px solid #0e0e0e'
     searchInput.style.width = '100%'
     searchInput.style.boxSizing = 'border-box'
+    searchInput.style.backgroundColor = '#333333'
+    searchInput.style.color = '#ffffff'
     searchInput.addEventListener('input', () => {
       const filter = searchInput.value.toLowerCase()
       const items = variableList.children
@@ -197,9 +202,9 @@ export class SpriteScene {
             listItem.style.alignItems = 'center'
             listItem.style.marginBottom = '5px'
             listItem.style.padding = '5px'
-            listItem.style.border = '1px solid #ddd'
+            listItem.style.border = '1px solid #0e0e0e'
             listItem.style.borderRadius = '4px'
-            listItem.style.backgroundColor = '#f9f9f9'
+            listItem.style.backgroundColor = '#1e1e1e'
 
             const nameSpan = document.createElement('span')
             nameSpan.textContent = variable.name
@@ -210,6 +215,8 @@ export class SpriteScene {
             const valueInput = document.createElement('input')
             valueInput.type = 'text'
             valueInput.style.fontFamily = 'monospace'
+            valueInput.style.backgroundColor = '#333333'
+            valueInput.style.color = '#ffffff'
             valueInput.value = Array.isArray(variable.value)
               ? JSON.stringify(variable.value)
               : variable.value
@@ -238,6 +245,7 @@ export class SpriteScene {
               variable.id
             )
             lockButton.textContent = v.freezing ? '🔓' : '🔒'
+            lockButton.style.backgroundColor = "#1e1e1e"
             lockButton.title = v.freezing ? '解锁' : '锁定'
             valueInput.disabled = v.freezing
             lockButton.addEventListener('click', () => {
@@ -250,6 +258,7 @@ export class SpriteScene {
               v.freezing = !v.freezing
               lockButton.title = v.freezing ? '解锁' : '锁定'
               lockButton.textContent = v.freezing ? '🔓' : '🔒'
+              lockButton.style.backgroundColor = "#1e1e1e"
               valueInput.disabled = v.freezing
             })
 

@@ -15,7 +15,7 @@ import { Monaco } from 'src/base/monaco'
 import { ExtensionOverlay } from 'src/overlay/extension'
 import { vm as SecureVM } from 'secure-vm'
 import withResolvers from 'src/util/withResolvers'
-import { PluginScene } from './plugin'
+// import { PluginScene } from './plugin'
 
 export class HomeScene {
   static title = '主页'
@@ -44,7 +44,7 @@ export class HomeScene {
    * @param {import('../base/scene').SceneManager} manager
    */
   constructor(manager) {
-    this.plugin = new PluginScene(manager)
+    // this.plugin = new PluginScene(manager)
     globalState.userInfo = null
     globalState.axios.interceptors.response.use(resp => {
       if (
@@ -115,6 +115,7 @@ export class HomeScene {
         globalState.vm = vm
         patch(vm, 'loadProject', loadProject => {
           return async input => {
+            console.log(input);
             /** @type {import('jszip')} */
             const JSZip = vm.exports.JSZip
             this.featureList.set('📝 作品数据', () =>
@@ -159,6 +160,7 @@ export class HomeScene {
                   resolver
                 )
               )
+              debugger;
               input = await (
                 await resolver.promise
               ).generateAsync({
@@ -168,20 +170,25 @@ export class HomeScene {
             return loadProject.call(vm, input)
           }
         })
-        // Account Hack
+
         const patchCCWAPI = ccwAPI => {
-          const _getUserInfo = ccwAPI.getUserInfo
-          ccwAPI.getUserInfo = async function () {
-            if (globalState.userInfo) return globalState.userInfo
-            return await _getUserInfo.call(this)
+          patch(ccwAPI, 'getUserInfo', getUserInfo => {
+            return async function () {
+              if (globalState.userInfo) return globalState.userInfo
+              return await getUserInfo.call(this)
+            }
+          })
+        }
+        if (vm.runtime.ccwAPI) {
+          patchCCWAPI(vm.runtime.ccwAPI)
+        }
+        patch(vm.runtime, 'setCCWAPI', setCCWAPI => {
+          return function (api) {
+            setCCWAPI.call(this, api)
+            patchCCWAPI(api)
           }
-        }
-        if (vm.runtime.ccwAPI) patchCCWAPI(vm.runtime.ccwAPI)
-        const _setCCWAPI = vm.runtime.setCCWAPI
-        vm.runtime.setCCWAPI = function (api) {
-          _setCCWAPI.call(this, api)
-          patchCCWAPI(api)
-        }
+        })
+
         let userName = vm.runtime.ioDevices.userData._username
         Object.defineProperty(vm.runtime.ioDevices.userData, '_username', {
           get: () => {
@@ -193,27 +200,39 @@ export class HomeScene {
           }
         })
         // Extension hack
-        const _compilerRegisterExtension =
-          vm.runtime.constructor.prototype.compilerRegisterExtension
+        // const _compilerRegisterExtension =
+        //   vm.runtime.constructor.prototype.compilerRegisterExtension
+          
+        // vm.runtime.compilerRegisterExtension = (name, extensionObject) => {
+        //   globalState.extensionInjector.emit(name, extensionObject)
+        //   _compilerRegisterExtension.call(vm.runtime, name, extensionObject)
+        // }
+        patch(vm.runtime.constructor.prototype, 'compilerRegisterExtension', compilerRegisterExtension => {
+          return function (name, extensionObject) {
+            globalState.extensionInjector.emit(name, extensionObject)
+            return compilerRegisterExtension.call(this, name, extensionObject)
+          }
+        })
+
         const patchUUID = extensionObject => {
           Object.defineProperties(extensionObject, {
             UserId: {
               get() {
                 return globalState.userInfo?.userId
               },
-              set() {}
+              set() { }
             },
             ccwUserNickname: {
               get() {
                 return globalState.userInfo?.userName
               },
-              set() {}
+              set() { }
             },
             ccwUserUUID: {
               get() {
                 return globalState.userInfo?.userId
               },
-              set() {}
+              set() { }
             }
           })
         }
@@ -235,7 +254,7 @@ export class HomeScene {
             extensionObject.isFanOfSomeone =
             extensionObject.requestFollow =
             extensionObject.isUserFavoriteOtherProject =
-              () => true
+            () => true
           const _insertCoinAndWaitForResult =
             extensionObject.insertCoinAndWaitForResult
           extensionObject.insertCoinAndWaitForResult = function (args) {
@@ -297,7 +316,7 @@ export class HomeScene {
           this.featureList.set('🌩️ 云数据', () => {
             this.manager.open(new CCWDataScene(this.manager, extensionObject))
           })
-          extensionObject.sendPlayEventCode = () => {}
+          extensionObject.sendPlayEventCode = () => { }
           // FIXME: SecureVM is slow
           // const context = SecureVM()
           // patch(extensionObject, 'getValueInJSON', getValueInJSON => {
@@ -481,10 +500,6 @@ export class HomeScene {
             }
           })
         })
-        vm.runtime.compilerRegisterExtension = (name, extensionObject) => {
-          globalState.extensionInjector.emit(name, extensionObject)
-          _compilerRegisterExtension.call(vm.runtime, name, extensionObject)
-        }
       })
     }
     this.manager = manager
@@ -497,12 +512,12 @@ export class HomeScene {
           this.manager.open(new ScriptScene(this.manager))
         }
       ],
-      [
-        '🛠️ 插件',
-        () => {
-          this.manager.open(this.plugin)
-        }
-      ],
+      // [
+      //   '🛠️ 插件',
+      //   () => {
+      //     this.manager.open(this.plugin)
+      //   }
+      // ],
       [
         'ℹ️ 关于',
         () => {
@@ -516,7 +531,7 @@ export class HomeScene {
     li.textContent = feature
     li.style.padding = '10px'
     li.style.margin = '5px 0'
-    li.style.backgroundColor = '#f0f0f0'
+    li.style.backgroundColor = '#333333'
     li.style.borderRadius = '8px'
     li.style.cursor = 'pointer'
     li.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.1)'
@@ -682,5 +697,5 @@ export class HomeScene {
 
     this.manager.target.appendChild(scrollable)
   }
-  dispose() {}
+  dispose() { }
 }

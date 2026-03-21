@@ -44,9 +44,11 @@ export class EconomyPoolScene {
     searchInput.type = 'text'
     searchInput.placeholder = '搜索规则...'
     searchInput.style.padding = '5px'
-    searchInput.style.border = '1px solid #ddd'
+    searchInput.style.border = '1px solid #0e0e0e'
     searchInput.style.width = '100%'
     searchInput.style.boxSizing = 'border-box'
+    searchInput.style.backgroundColor = '#333333'
+    searchInput.style.color = '#ffffff'
 
     searchInput.addEventListener('input', () => {
       const filter = searchInput.value.toLowerCase()
@@ -113,9 +115,9 @@ export class EconomyPoolScene {
         listItem.style.alignItems = 'flex-start'
         listItem.style.marginBottom = '5px'
         listItem.style.padding = '5px'
-        listItem.style.border = '1px solid #ddd'
+        listItem.style.border = '1px solid #0e0e0e'
         listItem.style.borderRadius = '4px'
-        listItem.style.backgroundColor = '#f9f9f9'
+        listItem.style.backgroundColor = '#1e1e1e'
 
         const ruleContainer = document.createElement('div')
         ruleContainer.style.display = 'flex'
@@ -194,9 +196,9 @@ export class EconomyPoolScene {
     fundPanel.style.flexDirection = 'row'
     fundPanel.style.alignItems = 'flex-start'
     fundPanel.style.padding = '5px'
-    fundPanel.style.border = '1px solid #ddd'
+    fundPanel.style.border = '1px solid #0e0e0e'
     fundPanel.style.borderRadius = '4px'
-    fundPanel.style.backgroundColor = '#f9f9f9'
+    fundPanel.style.backgroundColor = '#1e1e1e'
     const detailButton = document.createElement('button')
     detailButton.textContent = '规则详情'
     detailButton.style.cursor = 'pointer'
@@ -218,5 +220,5 @@ export class EconomyPoolScene {
     fundPanel.appendChild(fundButton)
     this.manager.target.appendChild(fundPanel)
   }
-  dispose() {}
+  dispose() { }
 }

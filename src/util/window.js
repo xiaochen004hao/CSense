@@ -22,7 +22,7 @@ export function createWindow(element, onClose) {
   reopenButton.style.width = '50px'
   reopenButton.style.height = '50px'
   reopenButton.style.borderRadius = '50%'
-  reopenButton.style.background = 'linear-gradient(45deg, #005EAC, #404040)'
+  reopenButton.style.background = 'linear-gradient(45deg, rgb(0 61 113), rgb(0 122 119))'
   reopenButton.title = '川菜王？脆弱性？的根本证明？'
 
   const image = document.createElement('img')
@@ -87,9 +87,9 @@ export function createWindow(element, onClose) {
   floatingDiv.style.minHeight = '120px'
   floatingDiv.style.width = 'auto'
   floatingDiv.style.height = 'auto'
-  floatingDiv.style.backgroundColor = '#ffffff' // Modern light background color
-  floatingDiv.style.color = '#000000' // Modern dark text color
-  floatingDiv.style.border = '1px solid #dddddd' // Modern light border color
+  floatingDiv.style.backgroundColor = '#1e1e1e' // Modern light background color
+  floatingDiv.style.color = '#ffffff' // Modern dark text color
+  floatingDiv.style.border = '1px solid #0e0e0e' // Modern light border color
   floatingDiv.style.borderRadius = '8px' // Modern rounded corners
   floatingDiv.style.zIndex = '9999'
   floatingDiv.style.top = '20px'
@@ -105,7 +105,7 @@ export function createWindow(element, onClose) {
   header.style.justifyContent = 'space-between'
   header.style.alignItems = 'center'
   header.style.padding = '10px'
-  header.style.background = 'linear-gradient(45deg, #005EAC, #404040)' // Modern primary color
+  header.style.background = 'linear-gradient(45deg, rgb(0 61 113), rgb(0 122 119))' // Modern primary color
   header.style.color = 'white'
   header.style.cursor = 'move'
   header.style.borderTopLeftRadius = '8px'
@@ -191,7 +191,7 @@ export function createWindow(element, onClose) {
 
   closeFloatingDiv() // 默认折叠
 
-  document.documentElement.appendChild(floatingDiv)
+  document.body.appendChild(floatingDiv)
 
   return {
     button: reopenButton,

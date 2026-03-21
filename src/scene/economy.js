@@ -13,7 +13,7 @@ export class EconomyScene {
     const scrollable = createScrollable()
     if (!this.pools) {
       if (!this.fetching) {
-        ;(async () => {
+        ; (async () => {
           const poolList = await this.extension.apis.getSmartContractList()
           for (const pool of poolList) {
             pool.balance =
@@ -42,9 +42,11 @@ export class EconomyScene {
       searchInput.type = 'text'
       searchInput.placeholder = '搜索合约...'
       searchInput.style.padding = '5px'
-      searchInput.style.border = '1px solid #ddd'
+      searchInput.style.border = '1px solid #0e0e0e'
       searchInput.style.width = '100%'
       searchInput.style.boxSizing = 'border-box'
+      searchInput.style.backgroundColor = '#333333'
+      searchInput.style.color = '#ffffff'
 
       searchInput.addEventListener('input', () => {
         const filter = searchInput.value.toLowerCase()
@@ -105,9 +107,9 @@ export class EconomyScene {
         listItem.style.alignItems = 'flex-start'
         listItem.style.marginBottom = '5px'
         listItem.style.padding = '5px'
-        listItem.style.border = '1px solid #ddd'
+        listItem.style.border = '1px solid #0e0e0e'
         listItem.style.borderRadius = '4px'
-        listItem.style.backgroundColor = '#f9f9f9'
+        listItem.style.backgroundColor = '#1e1e1e'
 
         const nameContainer = document.createElement('div')
         nameContainer.style.display = 'flex'
@@ -120,11 +122,10 @@ export class EconomyScene {
         if (pool.status !== 'ENABLED') {
           nameSpan.style.color = '#999'
         }
-        nameSpan.title = `创建时间 ${
-          pool.createdAt === null ? '未知' : new Date(pool.createdAt)
-        } / 最后更新 ${new Date(
-          pool.updatedAt === null ? '未知' : pool.updatedAt
-        )}`
+        nameSpan.title = `创建时间 ${pool.createdAt === null ? '未知' : new Date(pool.createdAt)
+          } / 最后更新 ${new Date(
+            pool.updatedAt === null ? '未知' : pool.updatedAt
+          )}`
         nameSpan.style.flexGrow = '1'
         nameSpan.style.marginRight = '10px'
 
@@ -132,6 +133,7 @@ export class EconomyScene {
         inspectButton.textContent = '🔍'
         inspectButton.style.cursor = 'pointer'
         inspectButton.style.marginRight = '5px'
+        inspectButton.style.backgroundColor = "#1e1e1e"
         inspectButton.title = '查看合约'
         inspectButton.addEventListener('click', () => {
           this.manager.open(
@@ -140,9 +142,8 @@ export class EconomyScene {
         })
 
         const extra = document.createElement('span')
-        extra.title = extra.textContent = `(${
-          pool.status === 'ENABLED' ? '可用' : '不可用'
-        }) ${typeMap[pool.type] ?? '未知'} / ${pool.balance} 币`
+        extra.title = extra.textContent = `(${pool.status === 'ENABLED' ? '可用' : '不可用'
+          }) ${typeMap[pool.type] ?? '未知'} / ${pool.balance} 币`
         extra.style.textWrap = 'nowrap'
         extra.style.overflow = 'hidden'
         extra.style.textOverflow = 'ellipsis' // Show ellipsis for overflow text
@@ -160,5 +161,5 @@ export class EconomyScene {
     }
     this.manager.target.appendChild(scrollable)
   }
-  dispose() {}
+  dispose() { }
 }

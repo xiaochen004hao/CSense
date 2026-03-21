@@ -44,9 +44,11 @@ export class LeaderboardScene {
       searchInput.type = 'text'
       searchInput.placeholder = '搜索排行榜...'
       searchInput.style.padding = '5px'
-      searchInput.style.border = '1px solid #ddd'
+      searchInput.style.border = '1px solid #0e0e0e'
       searchInput.style.width = '100%'
       searchInput.style.boxSizing = 'border-box'
+      searchInput.style.backgroundColor = '#333333'
+      searchInput.style.color = '#ffffff'
 
       searchInput.addEventListener('input', () => {
         const filter = searchInput.value.toLowerCase()
@@ -102,9 +104,9 @@ export class LeaderboardScene {
         listItem.style.flexDirection = 'column'
         listItem.style.alignItems = 'flex-start'
         listItem.style.padding = '5px'
-        listItem.style.border = '1px solid #ddd'
+        listItem.style.border = '1px solid #0e0e0e'
         listItem.style.borderRadius = '4px'
-        listItem.style.backgroundColor = '#f9f9f9'
+        listItem.style.backgroundColor = '#1e1e1e'
 
         const rankSpan = document.createElement('span')
         rankSpan.textContent = `${record.ranking}`
@@ -140,11 +142,9 @@ export class LeaderboardScene {
         nameSpan.style.textWrapMode = 'nowrap'
         nameSpan.style.overflow = 'hidden'
         nameSpan.style.textOverflow = 'ellipsis'
-        nameSpan.title = `创建时间 ${
-          record.createdAt === null ? '未知' : new Date(record.createdAt)
-        } / 最后更新 ${
-          record.updatedAt === null ? '未知' : new Date(record.updatedAt)
-        }`
+        nameSpan.title = `创建时间 ${record.createdAt === null ? '未知' : new Date(record.createdAt)
+          } / 最后更新 ${record.updatedAt === null ? '未知' : new Date(record.updatedAt)
+          }`
 
         const scoreSpan = document.createElement('span')
         scoreSpan.textContent = `${record.score} ${this.leaderboard.scoreUnit}`
@@ -174,9 +174,9 @@ export class LeaderboardScene {
         userItem.style.flexDirection = 'column'
         userItem.style.alignItems = 'flex-start'
         userItem.style.padding = '5px'
-        userItem.style.border = '1px solid #ddd'
+        userItem.style.border = '1px solid #0e0e0e'
         userItem.style.borderRadius = '4px'
-        userItem.style.backgroundColor = '#f9f9f9'
+        userItem.style.backgroundColor = '#1e1e1e'
 
         const rankSpan = document.createElement('span')
         rankSpan.textContent = `${record.ranking}`
@@ -203,11 +203,9 @@ export class LeaderboardScene {
         nameSpan.style.textWrapMode = 'nowrap'
         nameSpan.style.overflow = 'hidden'
         nameSpan.style.textOverflow = 'ellipsis'
-        nameSpan.title = `创建时间 ${
-          record.createdAt === null ? '未知' : new Date(record.createdAt)
-        } / 最后更新 ${
-          record.updatedAt === null ? '未知' : new Date(record.updatedAt)
-        }`
+        nameSpan.title = `创建时间 ${record.createdAt === null ? '未知' : new Date(record.createdAt)
+          } / 最后更新 ${record.updatedAt === null ? '未知' : new Date(record.updatedAt)
+          }`
 
         const scoreInput = document.createElement('input')
         scoreInput.value = record.score
@@ -251,5 +249,5 @@ export class LeaderboardScene {
       }
     }
   }
-  dispose() {}
+  dispose() { }
 }

@@ -150,9 +150,11 @@ export class ExtensionScene {
     searchInput.type = 'text'
     searchInput.placeholder = '搜索扩展...'
     searchInput.style.padding = '5px'
-    searchInput.style.border = '1px solid #ddd'
+    searchInput.style.border = '1px solid #0e0e0e'
     searchInput.style.flexGrow = '1'
     searchInput.style.boxSizing = 'border-box'
+    searchInput.style.backgroundColor = '#333333'
+    searchInput.style.color = '#fff'
     searchInput.addEventListener('input', () => {
       const filter = searchInput.value.toLowerCase()
       const items = list.children
@@ -223,9 +225,10 @@ export class ExtensionScene {
       listItem.style.display = 'flex'
       listItem.style.alignItems = 'center'
       listItem.style.padding = '5px'
-      listItem.style.border = '1px solid #ddd'
+      listItem.style.border = '1px solid #0e0e0e'
       listItem.style.borderRadius = '4px'
-      listItem.style.backgroundColor = '#f9f9f9'
+      listItem.style.backgroundColor = '#1e1e1e'
+      listItem.style.color = '#fff'
       const name = document.createElement('span')
       name.textContent = ext.name
       name.classList.add('item-name')
@@ -253,6 +256,7 @@ export class ExtensionScene {
         editButton.textContent = '✏️'
         editButton.title = '点击此处编辑此扩展。将会打开一个代码编辑器。'
         editButton.style.marginRight = '5px'
+        editButton.style.backgroundColor = '#1e1e1e'
         editButton.addEventListener('click', () => {
           this.manager.open(new ExtensionEditScene(this.manager, ext))
         })
@@ -261,6 +265,7 @@ export class ExtensionScene {
       const loadButton = document.createElement('button')
       loadButton.textContent = '⏬'
       loadButton.title = '立刻加载扩展'
+      loadButton.style.backgroundColor = '#1e1e1e'
       if (globalState.vm.extensionManager.isExtensionLoaded(ext.name)) {
         loadButton.textContent = '✅'
         loadButton.title = '已加载'
@@ -283,5 +288,5 @@ export class ExtensionScene {
     scrollable.appendChild(list)
     target.appendChild(scrollable)
   }
-  dispose() {}
+  dispose() { }
 }

@@ -69,8 +69,8 @@ export class ExtensionEditScene {
     } else {
       if (this.editor) this.editor.dispose()
       const editor = document.createElement('div')
-      editor.style.width = '550px'
-      editor.style.height = '300px'
+      editor.style.width = '900px'
+      editor.style.height = '900px'
       editor.style.marginBottom = '10px'
       target.appendChild(editor)
       this.editor = this.Monaco.editor.create(editor, {
@@ -78,7 +78,9 @@ export class ExtensionEditScene {
         automaticLayout: true,
         language: 'javascript',
         tabSize: 2,
-        insertSpaces: true
+        insertSpaces: true,
+        theme: 'vs-dark',
+        "semanticHighlighting.enabled": true,
       })
       this.editor.onDidChangeModelContent(() => {
         this.extension.newContent = this.editor.getValue()
@@ -148,6 +150,8 @@ export class ExtensionEditScene {
             useNoopButton.style.marginLeft = '10px'
             useNoopButton.style.padding = '10px 20px'
             useNoopButton.style.fontSize = '16px'
+            useNoopButton.style.backgroundColor = '#333333'
+            useNoopButton.style.color = 'white'
             useNoopButton.addEventListener('click', async () => {
               try {
                 useNoopButton.disabled = true
@@ -204,6 +208,8 @@ export class ExtensionEditScene {
             marketButton.style.marginLeft = '10px'
             marketButton.style.padding = '10px 20px'
             marketButton.style.fontSize = '16px'
+            marketButton.style.backgroundColor = '#333333'
+            marketButton.style.color = 'white'
             marketButton.addEventListener('click', async () => {
               marketButton.disabled = true
               marketButton.textContent = '请稍等'
@@ -236,6 +242,7 @@ export class ExtensionEditScene {
             inspectButton.style.marginBottom = '10px'
             inspectButton.style.marginRight = '10px'
             inspectButton.style.padding = '5px'
+            inspectButton.style.backgroundColor = '#333333'
             inspectButton.title = '查看官方提供的积木预览。'
             let floatDiv = null
             let hideTimeout = null

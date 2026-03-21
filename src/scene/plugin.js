@@ -13,10 +13,10 @@ export class PluginScene {
    */
   constructor(manager) {
     // TODO: 防篡改功能
-    this.plugins = JSON.parse(
+    this.plugins = [] /* JSON.parse(
       window.localStorage.getItem('__csense-plugins') ??
         (window.localStorage.setItem('__csense-plugins', '[]'), '[]')
-    )
+    ) */
     this.manager = manager
     globalState.pluginPromise = Promise.all(
       this.plugins.map(v => this.loadPlugin(v))
@@ -56,7 +56,7 @@ export class PluginScene {
     urlInput.type = 'text'
     urlInput.placeholder = '输入插件地址...'
     urlInput.style.padding = '5px'
-    urlInput.style.border = '1px solid #ddd'
+    urlInput.style.border = '1px solid #0e0e0e'
     urlInput.style.flexGrow = '1'
     urlInput.style.boxSizing = 'border-box'
     container.appendChild(urlInput)
@@ -120,9 +120,9 @@ export class PluginScene {
       listItem.style.display = 'flex'
       listItem.style.alignItems = 'center'
       listItem.style.padding = '5px'
-      listItem.style.border = '1px solid #ddd'
+      listItem.style.border = '1px solid #0e0e0e'
       listItem.style.borderRadius = '4px'
-      listItem.style.backgroundColor = '#f9f9f9'
+      listItem.style.backgroundColor = '#1e1e1e'
       const name = document.createElement('span')
       name.textContent = decodeURIComponent(
         urlObj.pathname.replace(/\/$/, '').split('/').at(-1) ||

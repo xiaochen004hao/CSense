@@ -36,8 +36,8 @@ export class ExtensionOverlay {
     warningDiv.title =
       '该项目自带了一些扩展。在您确认之前，项目将不会加载。点击此处进行处理。'
     warningDiv.style.width = '100%'
-    warningDiv.style.backgroundColor = 'orange'
-    warningDiv.style.color = 'black'
+    warningDiv.style.backgroundColor = 'darkorange'
+    warningDiv.style.color = 'white'
     warningDiv.style.textAlign = 'center'
     warningDiv.style.padding = '5px'
     warningDiv.style.fontSize = '12px'

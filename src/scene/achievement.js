@@ -46,9 +46,11 @@ export class AchievementScene {
       searchInput.type = 'text'
       searchInput.placeholder = '搜索排行榜...'
       searchInput.style.padding = '5px'
-      searchInput.style.border = '1px solid #ddd'
+      searchInput.style.border = '1px solid #0e0e0e'
       searchInput.style.width = '100%'
       searchInput.style.boxSizing = 'border-box'
+      searchInput.style.backgroundColor = '#333333'
+      searchInput.style.color = '#ffffff'
 
       searchInput.addEventListener('input', () => {
         const filter = searchInput.value.toLowerCase()
@@ -116,9 +118,9 @@ export class AchievementScene {
           listItem.style.alignItems = 'flex-start'
           listItem.style.marginBottom = '5px'
           listItem.style.padding = '5px'
-          listItem.style.border = '1px solid #ddd'
+          listItem.style.border = '1px solid #0e0e0e'
           listItem.style.borderRadius = '4px'
-          listItem.style.backgroundColor = '#f9f9f9'
+          listItem.style.backgroundColor = '#1e1e1e'
 
           const nameContainer = document.createElement('div')
           nameContainer.style.display = 'flex'
@@ -128,13 +130,12 @@ export class AchievementScene {
           const nameSpan = document.createElement('span')
           nameSpan.textContent = leaderboard.title
           nameSpan.className = 'item-name'
-          nameSpan.title = `创建时间 ${
-            leaderboard.createdAt === null
-              ? '未知'
-              : new Date(leaderboard.createdAt)
-          } / 最后更新 ${new Date(
-            leaderboard.updatedAt === null ? '未知' : leaderboard.updatedAt
-          )}`
+          nameSpan.title = `创建时间 ${leaderboard.createdAt === null
+            ? '未知'
+            : new Date(leaderboard.createdAt)
+            } / 最后更新 ${new Date(
+              leaderboard.updatedAt === null ? '未知' : leaderboard.updatedAt
+            )}`
           nameSpan.style.flexGrow = '1'
           nameSpan.style.marginRight = '10px'
 
@@ -142,6 +143,7 @@ export class AchievementScene {
           inspectButton.textContent = '🔍'
           inspectButton.style.cursor = 'pointer'
           inspectButton.style.marginRight = '5px'
+          inspectButton.style.backgroundColor = "#1e1e1e"
           inspectButton.title = '查看排行榜'
           inspectButton.addEventListener('click', () => {
             this.manager.open(
@@ -207,9 +209,11 @@ export class AchievementScene {
       searchInput.type = 'text'
       searchInput.placeholder = '搜索成就...'
       searchInput.style.padding = '5px'
-      searchInput.style.border = '1px solid #ddd'
+      searchInput.style.border = '1px solid #0e0e0e'
       searchInput.style.width = '100%'
       searchInput.style.boxSizing = 'border-box'
+      searchInput.style.backgroundColor = '#333333'
+      searchInput.style.color = '#ffffff'
 
       searchInput.addEventListener('input', () => {
         const filter = searchInput.value.toLowerCase()
@@ -279,9 +283,9 @@ export class AchievementScene {
           listItem.style.alignItems = 'flex-start'
           listItem.style.marginBottom = '5px'
           listItem.style.padding = '5px'
-          listItem.style.border = '1px solid #ddd'
+          listItem.style.border = '1px solid #0e0e0e'
           listItem.style.borderRadius = '4px'
-          listItem.style.backgroundColor = '#f9f9f9'
+          listItem.style.backgroundColor = '#1e1e1e'
 
           const nameContainer = document.createElement('div')
           nameContainer.style.display = 'flex'
@@ -290,15 +294,13 @@ export class AchievementScene {
 
           const icon = document.createElement('img')
           icon.src = achievement.icon
-          icon.title = `创建时间 ${
-            achievement.createdAt === null
-              ? '未知'
-              : new Date(achievement.createdAt)
-          } / 最后更新 ${
-            achievement.updatedAt === null
+          icon.title = `创建时间 ${achievement.createdAt === null
+            ? '未知'
+            : new Date(achievement.createdAt)
+            } / 最后更新 ${achievement.updatedAt === null
               ? '未知'
               : new Date(achievement.updatedAt)
-          }`
+            }`
           icon.alt = 'icon'
           icon.style.width = '24px'
           icon.style.height = '24px'
@@ -372,11 +374,11 @@ export class AchievementScene {
     achievementTab.textContent = '成就'
     achievementTab.style.flexGrow = '1'
     achievementTab.style.padding = '10px'
-    achievementTab.style.border = '1px solid #ddd'
+    achievementTab.style.border = '1px solid #0e0e0e'
     achievementTab.style.borderBottom =
-      this.selected === 'achievement' ? 'none' : '1px solid #ddd'
+      this.selected === 'achievement' ? 'none' : '1px solid #0e0e0e'
     achievementTab.style.backgroundColor =
-      this.selected === 'achievement' ? '#f9f9f9' : '#fff'
+      this.selected === 'achievement' ? '#333333' : '#1e1e1e'
     achievementTab.style.cursor = 'pointer'
     achievementTab.addEventListener('click', () => {
       this.selected = 'achievement'
@@ -387,11 +389,11 @@ export class AchievementScene {
     leaderboardTab.textContent = '排行榜'
     leaderboardTab.style.flexGrow = '1'
     leaderboardTab.style.padding = '10px'
-    leaderboardTab.style.border = '1px solid #ddd'
+    leaderboardTab.style.border = '1px solid #0e0e0e'
     leaderboardTab.style.borderBottom =
-      this.selected === 'leaderboard' ? 'none' : '1px solid #ddd'
+      this.selected === 'leaderboard' ? 'none' : '1px solid #0e0e0e'
     leaderboardTab.style.backgroundColor =
-      this.selected === 'leaderboard' ? '#f9f9f9' : '#fff'
+      this.selected === 'leaderboard' ? '#333333' : '#1e1e1e'
     leaderboardTab.style.cursor = 'pointer'
     leaderboardTab.addEventListener('click', () => {
       this.selected = 'leaderboard'
@@ -408,5 +410,5 @@ export class AchievementScene {
       this.renderLeaderboard()
     }
   }
-  dispose() {}
+  dispose() { }
 }

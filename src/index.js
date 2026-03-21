@@ -10,9 +10,11 @@ import { getCookie, setCookie } from './util/cookie'
 import { verify } from './util/encryption'
   ; (() => {
     if (!console.log.toString().includes('[native code]')) {
-      alert(
+      // location.replace(location.href);
+      console.warn(
         'C-S-ense 加载得 太慢了。\n\n这可能会导致一些功能异常，并且我们不会修复这些异常。\n如果您在使用 Tampermonkey: 请换用 Violentmonkey。\n如果您在使用 Violentmonkey：请在设置中勾选同步 page 模式。这可能会导致一些脚本异常，请自行取舍。'
       )
+      console.log(console.log);
     }
     // try getting axios
     const _apply = Function.prototype.apply
@@ -33,6 +35,7 @@ import { verify } from './util/encryption'
       }
       return _apply.call(this, thisArg, args)
     }
+
     const userId = getCookie('cookie-user-id')
     if (!userId) {
       return
@@ -68,36 +71,109 @@ import { verify } from './util/encryption'
     manager._doSetTitle = win.setTitle
     globalState.button = win.button
     manager._updateTitle()
-    globalThis.manager = manager
+    // globalThis.manager = manager
     // Anti-detection designed for "some" tricky projects
     // NOTE: 以下为最基本的防护，无法避免通过 documentElement 等方式获取到 CSense 的存在，此时可以考虑安装插件。
-    // patch(Document.prototype, 'querySelectorAll', querySelectorAll => {
-    //   return function (selectors) {
-    //     if (this !== document) {
-    //       return querySelectorAll.call(this, selectors)
-    //     }
-    //     const elements = Array.from(querySelectorAll.call(this, selectors))
-    //     const result = elements.filter(
-    //       el => !(el === win.button || el === win.window)
-    //     )
-    //     return Object.assign(result, {
-    //       item(nth) {
-    //         return result[nth]
-    //       }
-    //     })
-    //   }
-    // })
+    function isDescendant(parent, child) {
+      let node = child;
+      while (node) {
+        if (node === parent) return true;
+        node = node.parentNode;
+      }
+      return false;
+    }
 
-    // patch(Document.prototype, 'querySelector', querySelector => {
-    //   return function (selectors) {
-    //     if (this !== document) {
-    //       return querySelector.call(this, selectors)
-    //     }
-    //     const res = querySelector.call(this, selectors)
-    //     if (res === win.button || res === win.window) {
-    //       return null
-    //     }
-    //     return res
-    //   }
-    // })
+    patch(Document.prototype, 'querySelectorAll', querySelectorAll => {
+      return function (selectors) {
+        const elements = Array.from(querySelectorAll.call(this, selectors));
+        const filtered = elements.filter(
+          el => !(el === win.button || el === win.window || isDescendant(win.window, el) || isDescendant(win.button, el))
+        );
+
+        // 创建严格模拟的 NodeList
+        const nodeList = Object.create(NodeList.prototype);
+        const length = filtered.length;
+
+        // 定义 length 属性（不可写、不可配置、可枚举）
+        Object.defineProperty(nodeList, 'length', {
+          value: length,
+          writable: false,
+          configurable: false,
+          enumerable: true,
+        });
+
+        // 定义每个索引的属性（不可写、不可配置、可枚举）
+        for (let i = 0; i < length; i++) {
+          Object.defineProperty(nodeList, i, {
+            value: filtered[i],
+            writable: false,
+            configurable: false,
+            enumerable: true,
+          });
+        }
+
+        return nodeList;
+      }
+    })
+
+    patch(Document.prototype, 'querySelector', querySelector => {
+      return function (selectors) {
+        const res = querySelector.call(this, selectors)
+        if (res === win.button || res === win.window || isDescendant(win.window, res) || isDescendant(win.button, res)) {
+          return null
+        }
+        return res
+      }
+    })
+
+    const org_appendChild = document.head.appendChild
+    document.head.appendChild = function (element) {
+      if (element.tagName === 'IFRAME') {
+        org_appendChild.call(this, element);
+        patch(element.contentWindow.Document.prototype, 'querySelectorAll', querySelectorAll => {
+          return function (selectors) {
+            const elements = Array.from(querySelectorAll.call(this, selectors));
+            const filtered = elements.filter(
+              el => !(el === win.button || el === win.window || isDescendant(win.window, el) || isDescendant(win.button, el))
+            );
+
+            // 创建严格模拟的 NodeList
+            const nodeList = Object.create(NodeList.prototype);
+            const length = filtered.length;
+
+            // 定义 length 属性（不可写、不可配置、可枚举）
+            Object.defineProperty(nodeList, 'length', {
+              value: length,
+              writable: false,
+              configurable: false,
+              enumerable: true,
+            });
+
+            // 定义每个索引的属性（不可写、不可配置、可枚举）
+            for (let i = 0; i < length; i++) {
+              Object.defineProperty(nodeList, i, {
+                value: filtered[i],
+                writable: false,
+                configurable: false,
+                enumerable: true,
+              });
+            }
+
+            return nodeList;
+          }
+        })
+
+        patch(element.contentWindow.Document.prototype, 'querySelector', querySelector => {
+          return function (selectors) {
+            const res = querySelector.call(this, selectors)
+            if (res === win.button || res === win.window || isDescendant(win.window, res) || isDescendant(win.button, res)) {
+              return null
+            }
+            return res
+          }
+        })
+        return element
+      }
+      return org_appendChild.call(this, element)
+    }
   })()

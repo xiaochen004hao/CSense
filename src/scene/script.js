@@ -68,7 +68,9 @@ target.var('我的变量').set('你好').watch(function (before, after) {
         automaticLayout: true,
         language: 'javascript',
         tabSize: 2,
-        insertSpaces: true
+        insertSpaces: true,
+        theme: 'vs-dark',
+        "semanticHighlighting.enabled": true,
       })
 
       this.editor.addAction({

@@ -22,9 +22,11 @@ export class ProjectScene {
     searchInput.type = 'text'
     searchInput.placeholder = '搜索角色...'
     searchInput.style.padding = '5px'
-    searchInput.style.border = '1px solid #ddd'
+    searchInput.style.border = '1px solid #0e0e0e'
     searchInput.style.width = '100%'
     searchInput.style.boxSizing = 'border-box'
+    searchInput.style.backgroundColor = '#333333'
+    searchInput.style.color = '#ffffff'
 
     const downloadButton = document.createElement('button')
     downloadButton.textContent = '⬇️'
@@ -177,9 +179,10 @@ export class ProjectScene {
       listItem.style.boxSizing = 'border-box'
       listItem.style.textAlign = 'center'
       listItem.style.padding = '10px'
-      listItem.style.border = '1px solid #ddd'
+      listItem.style.border = '1px solid #0e0e0e'
       listItem.style.borderRadius = '8px'
-      listItem.style.backgroundColor = '#f9f9f9'
+      listItem.style.backgroundColor = '#333333'
+      listItem.style.color = 'white'
       listItem.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.1)'
 
       // Add hover effect
